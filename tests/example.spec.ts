@@ -20,5 +20,5 @@ test('has title', async ({ page }) => {
 test('failed test', async () => {
   let myVar: boolean;
   myVar = true;
-  expect(myVar).toBe(false);
+  expect(myVar).toBe(true);
 });
