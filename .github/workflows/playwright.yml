@@ -13,11 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    # Playwright browser caching
+    - name: Cache Playwright Browsers
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+
     - uses: actions/setup-node@v4
       with:
-        node-version: lts/*
+        node-version: lts/*    
     - name: Install dependencies
       run: npm ci
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
